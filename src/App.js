@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from 'react';
+import Input from './components/Input/Input';
+import ProductDisplay from './components/DisplayItem/DisplayItem';
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const handleAddProduct = (product) => {
+    setProducts((prevProducts) => [...prevProducts, { ...product, id: Date.now() }]);
+  };
+  const handlePurchase = (productId, size) => {
+    setProducts((prevProducts) => {
+      return prevProducts.map((product) => {
+        if (product.id === productId && product.quantities[size] > 0) {
+          const updatedProduct = { ...product };
+          updatedProduct.quantities[size] -= 1;
+          return updatedProduct;
+        }
+        return product;
+      });
+    });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <Input onAddProduct={handleAddProduct}/>
+    {products.map((product) => (
+          <ProductDisplay key={product.id} product={product} onPurchase={handlePurchase} />
+    ))}
     </div>
   );
 }
