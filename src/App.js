@@ -15,12 +15,14 @@ function App() {
         if (product.id === productId && product.quantities[size] > 0) {
           const updatedProduct = { ...product };
           updatedProduct.quantities[size] -= 1;
+          console.log('Updated Product:', updatedProduct); // Add this line
           return updatedProduct;
         }
         return product;
       });
     });
   };
+  
   
   
   return (

@@ -7,11 +7,13 @@ const ProductDisplay = ({ product, onPurchase }) => {
   const { addItem } = useContext(CartContext);
 
   const purchaseHandler = (size) => {
+    console.log('Button Clicked for size:', size);
     if (product.quantities[size] > 0) {
       addItem({ ...product, selectedSize: size, price: Number(product.price) });
       onPurchase(product.id, size);
     }
   };
+  
   
 
   return (
