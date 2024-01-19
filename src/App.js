@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Input from './components/Input/Input';
 import ProductDisplay from './components/DisplayItem/DisplayItem';
+import Cart from './components/Cart/Cart';
+import CartProvider from './components/Store/Cart-Provider';
 function App() {
   const [products, setProducts] = useState([]);
 
@@ -20,12 +22,13 @@ function App() {
     });
   };
   return (
-    <div>
+    <CartProvider>
     <Input onAddProduct={handleAddProduct}/>
     {products.map((product) => (
           <ProductDisplay key={product.id} product={product} onPurchase={handlePurchase} />
     ))}
-    </div>
+    <Cart />
+    </CartProvider>
   );
 }
 

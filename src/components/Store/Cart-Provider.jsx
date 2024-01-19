@@ -5,6 +5,7 @@ import CartContext from './Cart-Context';
 const defaultCartState = {
   cartItems: [],
   totalItems: 0,
+  totalAmount: 0, 
 };
 
 const cartReducer = (state, action) => {
@@ -29,6 +30,7 @@ const cartReducer = (state, action) => {
     return {
       cartItems: updatedItems,
       totalItems: state.totalItems + 1,
+      totalAmount: state.totalAmount + action.payload.price, 
     };
   }
 
@@ -55,6 +57,7 @@ const cartReducer = (state, action) => {
     return {
       cartItems: updatedItems,
       totalItems: state.totalItems - 1,
+      totalAmount: state.totalAmount - action.payload.price,
     };
   }
 
@@ -67,7 +70,7 @@ const CartProvider = (props) => {
     defaultCartState
   );
 
-  const addToCart = (item) => {
+  const addItem = (item) => {
     dispatchCartAction({ type: 'ADD_TO_CART', payload: item });
   };
 
@@ -78,7 +81,7 @@ const CartProvider = (props) => {
   const cartContext = {
     cartItems: cartState.cartItems,
     totalItems: cartState.totalItems,
-    addToCart: addToCart,
+    addItem: addItem,
     removeFromCart: removeFromCart,
   };
 

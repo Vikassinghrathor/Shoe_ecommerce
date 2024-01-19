@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-const Input = (onAddProduct) => {
-  const[input,setInput] = useState({
+const Input = ({ onAddProduct }) => {
+  const [input, setInput] = useState({
     shoeName: '',
     description: '',
     price: '',
@@ -24,22 +24,21 @@ const Input = (onAddProduct) => {
       ...prevDetails,
       quantities: {
         ...prevDetails.quantities,
-        [size]: Math.max(0, parseInt(value, 10)), // Ensure the value is not negative and convert to integer
+        [size]: Math.max(0, parseInt(value, 10)),
       },
     }));
   };
 
   const handleAddProduct = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
 
-    // Validate input fields
     if (!input.shoeName || !input.description || !input.price) {
       alert('Please fill in all fields.');
       return;
     }
+
     onAddProduct(input);
 
-    // Clear input fields
     setInput({
       shoeName: '',
       description: '',
@@ -51,6 +50,7 @@ const Input = (onAddProduct) => {
       },
     });
   };
+
   return (
     <>
       <div>
@@ -63,7 +63,7 @@ const Input = (onAddProduct) => {
         />
         <label>Description</label>
         <input 
-        type='textarea'
+        type='text'
         value={input.description}
         onChange={(e) => handleInputChange('description', e.target.value)}
         />

@@ -1,26 +1,26 @@
-// Cart.js
 import React, { useContext } from 'react';
 import CartItem from './CartItem';
 import CartContext from '../Store/Cart-Context';
-import classes from './Cart.module.css';
+
+// Cart.jsx
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
-  const hasItems = cartCtx.cartItems.length > 0;
+  const totalAmount = `$${(cartCtx.totalAmount || 0).toFixed(2)}`; // Ensure totalAmount is defined
+  const hasItems = cartCtx.cartItems && cartCtx.cartItems.length > 0; // Check if cartItems is defined
 
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);
   };
 
   const cartItemAddHandler = (item) => {
-    cartCtx.addToCart({ ...item, amount: 1 });
+    cartCtx.addItem({ ...item, amount: 1 });
   };
 
   const cartItems = (
-    <ul className={classes['cart-items']}>
-      {cartCtx.cartItems.map((item) => (
+    <ul>
+      {cartCtx.cartItems && cartCtx.cartItems.map((item) => (
         <CartItem
           key={item.id}
           shoeName={item.shoeName}
@@ -36,15 +36,15 @@ const Cart = (props) => {
   return (
     <div>
       {cartItems}
-      <div className={classes.total}>
+      <div>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      <div className={classes.actions}>
-        <button className={classes['button--alt']} onClick={props.onClose}>
+      <div>
+        <button onClick={props.onClose}>
           Close
         </button>
-        {hasItems && <button className={classes.button}>Order</button>}
+        {hasItems && <button>Order</button>}
       </div>
     </div>
   );

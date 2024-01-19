@@ -1,4 +1,5 @@
 // ProductDisplay.js
+
 import React, { useContext } from 'react';
 import CartContext from '../Store/Cart-Context';
 
@@ -16,7 +17,7 @@ const ProductDisplay = ({ product, onPurchase }) => {
     <div>
       <h2>{product.shoeName}</h2>
       <p>{product.description}</p>
-      <p>Price: ${product.price}</p>
+      <p>Price: ${Number(product.price).toFixed(2)}</p>
 
       {/* Buttons to purchase shoes in different sizes */}
       <button onClick={() => purchaseHandler('large')}>Buy Large ({product.quantities.large})</button>
