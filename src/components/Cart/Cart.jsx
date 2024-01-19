@@ -7,7 +7,7 @@ import CartContext from '../Store/Cart-Context';
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${(cartCtx.totalAmount || 0).toFixed(2)}`; // Ensure totalAmount is defined
+  const totalAmount = `$${Number(cartCtx.totalAmount || 0).toFixed(2)}`;
   const hasItems = cartCtx.cartItems && cartCtx.cartItems.length > 0; // Check if cartItems is defined
 
   const cartItemRemoveHandler = (id) => {

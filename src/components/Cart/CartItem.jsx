@@ -1,20 +1,23 @@
+// CartItem.jsx
 import React from 'react';
 
 const CartItem = (props) => {
-  const price = `$${props.price.toFixed(2)}`;
+  const { shoeName, quantity, price, onRemove, onAdd } = props;
+
+  const formattedPrice = typeof price === 'number' ? price.toFixed(2) : '0.00';
 
   return (
     <li>
       <div>
-        <h2>{props.shoeName}</h2>
+        <h3>{shoeName}</h3>
         <div>
-          <span>{price}</span>
-          <span>x {props.quantity}</span>
+          <span>Quantity: {quantity}</span>
+          <span>Price: ${formattedPrice}</span>
         </div>
       </div>
       <div>
-        <button onClick={props.onRemove}>−</button>
-        <button onClick={props.onAdd}>+</button>
+        <button onClick={onRemove}>Remove</button>
+        <button onClick={onAdd}>Add</button>
       </div>
     </li>
   );

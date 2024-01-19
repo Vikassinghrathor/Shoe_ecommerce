@@ -5,6 +5,8 @@ import CartContext from '../Store/Cart-Context';
 
 const ProductDisplay = ({ product, onPurchase }) => {
   const { addItem } = useContext(CartContext);
+  console.log(addItem);
+
 
   const purchaseHandler = (size) => {
     if (product.quantities[size] > 0) {

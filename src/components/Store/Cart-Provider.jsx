@@ -74,15 +74,16 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: 'ADD_TO_CART', payload: item });
   };
 
-  const removeFromCart = (item) => {
+  const removeItem = (item) => {
     dispatchCartAction({ type: 'REMOVE_FROM_CART', payload: item });
   };
 
   const cartContext = {
     cartItems: cartState.cartItems,
     totalItems: cartState.totalItems,
+    totalAmount: cartState.totalAmount,
     addItem: addItem,
-    removeFromCart: removeFromCart,
+    removeItem: removeItem,
   };
 
   return (
