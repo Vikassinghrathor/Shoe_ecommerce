@@ -4,7 +4,7 @@ import React from 'react';
 const CartItem = (props) => {
   const { shoeName, quantity, price, onRemove, onAdd } = props;
 
-  const formattedPrice = typeof price === 'number' ? price.toFixed(2) : '0.00';
+  const formattedPrice = Number(price * quantity).toFixed(2);
 
   return (
     <li>
@@ -12,7 +12,7 @@ const CartItem = (props) => {
         <h3>{shoeName}</h3>
         <div>
           <span>Quantity: {quantity}</span>
-          <span>Price: ${formattedPrice}</span>
+          <span>Total Price: ${Number(price * quantity).toFixed(2)}</span>
         </div>
       </div>
       <div>

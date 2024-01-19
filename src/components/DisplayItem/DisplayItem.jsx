@@ -5,15 +5,14 @@ import CartContext from '../Store/Cart-Context';
 
 const ProductDisplay = ({ product, onPurchase }) => {
   const { addItem } = useContext(CartContext);
-  console.log(addItem);
-
 
   const purchaseHandler = (size) => {
     if (product.quantities[size] > 0) {
-      addItem({ ...product, selectedSize: size });
+      addItem({ ...product, selectedSize: size, price: Number(product.price) });
       onPurchase(product.id, size);
     }
   };
+  
 
   return (
     <div>

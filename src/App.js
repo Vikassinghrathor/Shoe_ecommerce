@@ -21,6 +21,8 @@ function App() {
       });
     });
   };
+  
+  
   return (
     <CartProvider>
     <Input onAddProduct={handleAddProduct}/>
