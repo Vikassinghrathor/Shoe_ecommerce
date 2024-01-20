@@ -18,8 +18,8 @@ const ProductDisplay = ({ product, onPurchase }) => {
 
   return (
     <div>
-      <h2>{product.shoeName}</h2>
-      <p>{product.description}</p>
+      <h2>Shoe Name : {product.shoeName}</h2>
+      <p>Description: {product.description}</p>
       <p>Price: ${Number(product.price).toFixed(2)}</p>
 
       {/* Buttons to purchase shoes in different sizes */}

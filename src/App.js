@@ -13,19 +13,29 @@ function App() {
     setProducts((prevProducts) => {
       return prevProducts.map((product) => {
         if (product.id === productId && product.quantities[size] > 0) {
-          return {
-            ...product,
-            quantities: {
-              ...product.quantities,
-              [size]: product.quantities[size] - 1,
-            },
+          const updatedQuantities = {
+            ...product.quantities,
+            [size]: product.quantities[size] - 1,
           };
+  
+          // Check if all sizes have zero quantities, and remove the product
+          const isProductEmpty = Object.values(updatedQuantities).every(
+            (quantity) => quantity === 0
+          );
+  
+          return isProductEmpty
+            ? null // Remove the product from the array
+            : {
+                ...product,
+                quantities: updatedQuantities,
+              };
         }
         return product;
-      });
+      }).filter(Boolean); // Filter out null (removed products)
     });
   };
   
+
   return (
     <CartProvider>
     <Input onAddProduct={handleAddProduct}/>

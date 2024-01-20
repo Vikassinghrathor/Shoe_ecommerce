@@ -24,7 +24,10 @@ const cartReducer = (state, action) => {
       updatedItems = [...state.cartItems];
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
-      updatedItems = [...state.cartItems, { ...action.payload, quantity: 1 }];
+      updatedItems = [
+        ...state.cartItems,
+        { ...action.payload, quantity: 1 }, // Ensure quantity is set
+      ];    
     }
 
     return {
@@ -38,6 +41,12 @@ const cartReducer = (state, action) => {
     const existingCartItemIndex = state.cartItems.findIndex(
       (item) => item.id === action.payload.id
     );
+
+    if (existingCartItemIndex === -1) {
+      // Item not found, return current state
+      return state;
+    }
+
     const existingCartItem = state.cartItems[existingCartItemIndex];
     let updatedItems;
 
@@ -57,7 +66,7 @@ const cartReducer = (state, action) => {
     return {
       cartItems: updatedItems,
       totalItems: state.totalItems - 1,
-      totalAmount: state.totalAmount - action.payload.price,
+      totalAmount: state.totalAmount - existingCartItem.price,
     };
   }
 
