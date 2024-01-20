@@ -1,7 +1,7 @@
 // ProductDisplay.js
 
 import React, { useContext } from 'react';
-import CartContext from '../Store/Cart-Context';
+import CartContext from '../../Store/Cart-Context';
 
 const ProductDisplay = ({ product, onPurchase }) => {
   const { addItem } = useContext(CartContext);

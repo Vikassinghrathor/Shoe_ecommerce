@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Input from './components/Input/Input';
 import ProductDisplay from './components/DisplayItem/DisplayItem';
 import Cart from './components/Cart/Cart';
-import CartProvider from './components/Store/Cart-Provider';
+import CartProvider from './Store/Cart-Provider';
 function App() {
   const [products, setProducts] = useState([]);
 
@@ -13,17 +13,18 @@ function App() {
     setProducts((prevProducts) => {
       return prevProducts.map((product) => {
         if (product.id === productId && product.quantities[size] > 0) {
-          const updatedProduct = { ...product };
-          updatedProduct.quantities[size] -= 1;
-          console.log('Updated Product:', updatedProduct); // Add this line
-          return updatedProduct;
+          return {
+            ...product,
+            quantities: {
+              ...product.quantities,
+              [size]: product.quantities[size] - 1,
+            },
+          };
         }
         return product;
       });
     });
   };
-  
-  
   
   return (
     <CartProvider>
