@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import CartItem from './CartItem';
 import CartContext from '../../Store/Cart-Context';
 
-// Cart.jsx
-
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${Number(cartCtx.totalAmount || 0).toFixed(2)}`;
-  const hasItems = cartCtx.cartItems && cartCtx.cartItems.length > 0; // Check if cartItems is defined
+  const hasItems = cartCtx.cartItems && cartCtx.cartItems.length > 0; 
 
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);

@@ -26,7 +26,7 @@ const cartReducer = (state, action) => {
     } else {
       updatedItems = [
         ...state.cartItems,
-        { ...action.payload, quantity: 1 }, // Ensure quantity is set
+        { ...action.payload, quantity: 1 },
       ];    
     }
 
@@ -43,7 +43,6 @@ const cartReducer = (state, action) => {
     );
 
     if (existingCartItemIndex === -1) {
-      // Item not found, return current state
       return state;
     }
 

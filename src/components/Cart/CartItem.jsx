@@ -1,11 +1,7 @@
-// CartItem.jsx
 import React from 'react';
 
 const CartItem = (props) => {
   const { shoeName, quantity, price, onRemove, onAdd } = props;
-
-  // const formattedPrice = Number(price * quantity).toFixed(2);
-
   return (
     <li>
       <div>
